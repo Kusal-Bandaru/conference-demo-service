@@ -1,9 +1,14 @@
 package com.kusal.conferencedemo.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="speakers")
@@ -24,11 +29,29 @@ public class Speaker {
 	
 	@Column(name="speaker_bio")
 	String bio;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "sessionSpeakers")
+	List<Session> speakerSessions;
 
 	/**
 	 * default constructor
 	 */
 	public Speaker() {
+	}
+
+	/**
+	 * @return the speakerSessions
+	 */
+	public List<Session> getSpeakerSessions() {
+		return speakerSessions;
+	}
+
+	/**
+	 * @param speakerSessions the speakerSessions to set
+	 */
+	public void setSpeakerSessions(List<Session> speakerSessions) {
+		this.speakerSessions = speakerSessions;
 	}
 
 	/**

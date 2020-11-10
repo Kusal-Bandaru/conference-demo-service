@@ -1,8 +1,13 @@
 package com.kusal.conferencedemo.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,12 +29,34 @@ public class Session {
 	
 	@Column(name="session_type")
 	String type;
+	
+	@ManyToMany
+	@JoinTable(
+		name="session_speaker",
+		joinColumns = @JoinColumn(name="session_id"),
+		inverseJoinColumns = @JoinColumn(name="speaker_id"))	
+	List<Speaker> sessionSpeakers;
 
 	/**
 	 * default constructor
 	 */
 	public Session() {
 	}
+
+	/**
+	 * @return the sessionSpeakers
+	 */
+	public List<Speaker> getSessionSpeakers() {
+		return sessionSpeakers;
+	}
+
+	/**
+	 * @param sessionSpeakers the sessionSpeakers to set
+	 */
+	public void setSessionSpeakers(List<Speaker> sessionSpeakers) {
+		this.sessionSpeakers = sessionSpeakers;
+	}
+
 
 	/**
 	 * @return the id
