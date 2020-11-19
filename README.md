@@ -1,4 +1,4 @@
-# conference-demo
+# conference-demo-service
 
 ## Follow the below instructions to setup mysql DB requried for the app
 
